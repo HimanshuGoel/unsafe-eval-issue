@@ -15,9 +15,9 @@ import { DynamicRoutesService, ModelScopeCreationComponent } from './dynamic-rou
 export class LoadingComponent {}
 
 @NgModule({
-  declarations: [LoadingComponent],
+  declarations: [LoadingComponent, ModelScopeCreationComponent],
   imports: [CommonModule],
-  entryComponents: [LoadingComponent],
+  entryComponents: [LoadingComponent, ModelScopeCreationComponent],
 })
 export class LoadingModule {}
 
@@ -43,7 +43,7 @@ export function createCompiler(compilerFactory: CompilerFactory) {
     LoadingModule,
   ],
   exports: [RouterModule],
-  entryComponents: [ModelScopeCreationComponent],
+  entryComponents: [],
 })
 export class DynamicRouterModule {
   static forRoot(): ModuleWithProviders<DynamicRouterModule> {
