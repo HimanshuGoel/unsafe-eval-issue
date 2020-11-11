@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
 import { RouterModule, Routes } from '@angular/router';
-import { DynamicRoutesService } from './dynamic-routes.service';
+import { DynamicRoutesService, ModelScopeCreationComponent } from './dynamic-routes.service';
 
 @Component({ template: `<p>loading-component works!</p>` })
 export class LoadingComponent {}
@@ -43,7 +43,7 @@ export function createCompiler(compilerFactory: CompilerFactory) {
     LoadingModule,
   ],
   exports: [RouterModule],
-  entryComponents: [],
+  entryComponents: [ModelScopeCreationComponent],
 })
 export class DynamicRouterModule {
   static forRoot(): ModuleWithProviders<DynamicRouterModule> {
