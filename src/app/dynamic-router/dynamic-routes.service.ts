@@ -15,9 +15,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import {
   mapChildren,
   mapComponentName,
-  mapData,
   mapLazyLoadModule,
-  mapOutlet,
   mapPathMatchToRoute,
   mapPathOnToRoute,
   mapRedirectToRoute,
