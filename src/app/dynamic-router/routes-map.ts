@@ -2,7 +2,7 @@ import { Type } from '@angular/core';
 import { Route, Routes } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { ModelScopeCreationComponent } from './model-scope-creation/model-scope-creation.component';
+import { ModelScopeCreationComponent } from './dynamic-routes.service';
 
 export const mapLazyLoadModule = (
   loadChildren: string,
@@ -40,23 +40,9 @@ export const mapRedirectToRoute = (redirectTo: string): Partial<Route> => {
   return {};
 };
 
-export const mapData = (data: any): Partial<Route> => {
-  if (data) {
-    return { data };
-  }
-  return {};
-};
-
 export const mapChildren = (children: Routes): Partial<Route> => {
   if (children && children.length) {
     return { children };
-  }
-  return {};
-};
-
-export const mapOutlet = (outlet: string): Partial<Route> => {
-  if (outlet) {
-    return { outlet };
   }
   return {};
 };

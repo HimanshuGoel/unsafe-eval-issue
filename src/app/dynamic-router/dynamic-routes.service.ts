@@ -1,5 +1,5 @@
 import { Route } from '@angular/compiler/src/core';
-import { Compiler, Injectable, NgModule, Type } from '@angular/core';
+import { Compiler, Component, Injectable, NgModule, Type } from '@angular/core';
 
 import {
   ActivatedRouteSnapshot,
@@ -22,22 +22,15 @@ import {
   mapPathOnToRoute,
   mapRedirectToRoute,
 } from './routes-map';
-import { ModelScopeCreationComponent } from './model-scope-creation/model-scope-creation.component';
-import { DynamicType1Component } from '../dynamic-type1/dynamic-type1.component';
+
+@Component({ template: `<p>model-scope-creation works!</p>` })
+export class ModelScopeCreationComponent {}
 
 const defaultAppRoute = {
   routes: [
     {
       path: '',
-      pathMatch: 'full',
-      redirectTo: 'app1',
-    },
-    {
-      path: 'app1',
-      componentName: 'fullLayout',
-      data: {
-        screenConfig: [],
-      },
+      componentName: 'dummy',
       children: [
         {
           path: '',
@@ -50,12 +43,7 @@ const defaultAppRoute = {
             routes: [
               {
                 path: '',
-                redirectTo: 'dynamic1',
-              },
-              {
-                path: 'dynamic1',
                 componentName: 'dynamicType1',
-                data: {},
               },
             ],
           },
@@ -69,9 +57,7 @@ const defaultAppRoute = {
   providedIn: 'root',
 })
 export class DynamicRoutesService implements CanActivate {
-  constructor(private router: Router, private compiler: Compiler) {
-    console.log('HG In dynamic routes service');
-  }
+  constructor(private router: Router, private compiler: Compiler) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -92,7 +78,6 @@ export class DynamicRoutesService implements CanActivate {
 
   private getRoutes(childRoutes): Observable<{ routes: Route[] }> {
     const routes = childRoutes || defaultAppRoute;
-
     return of(routes).pipe(
       map(({ routes }) => {
         return {
@@ -109,8 +94,6 @@ export class DynamicRoutesService implements CanActivate {
         pathMatch,
         componentName,
         redirectTo,
-        outlet,
-        data,
         children,
         loadChildren,
       }) => {
@@ -123,20 +106,16 @@ export class DynamicRoutesService implements CanActivate {
           ...mapPathOnToRoute(path),
           ...mapPathMatchToRoute(pathMatch),
           ...mapRedirectToRoute(redirectTo),
-          ...mapData(data),
           ...mapComponentName(this.getDynamicLayoutMap(componentName)),
           ...mapChildren(this.mapToValidAngularRoutes(children)),
-          ...mapOutlet(outlet),
         };
       }
     );
   }
 
   getDynamicLayoutMap(componentName) {
-    if (componentName === 'fullLayout') {
+    if (componentName === 'dummy') {
       return ModelScopeCreationComponent;
-    } else if (componentName === 'dynamicType1') {
-      return DynamicType1Component;
     }
   }
 

@@ -10,13 +10,12 @@ import {
 import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
 import { RouterModule, Routes } from '@angular/router';
 import { DynamicRoutesService } from './dynamic-routes.service';
-import { ModelScopeCreationComponent } from './model-scope-creation/model-scope-creation.component';
 
-@Component({ template: `` })
+@Component({ template: `<p>loading-component works!</p>` })
 export class LoadingComponent {}
 
 @NgModule({
-  declarations: [LoadingComponent, ModelScopeCreationComponent],
+  declarations: [LoadingComponent],
   imports: [CommonModule],
   entryComponents: [LoadingComponent],
 })
@@ -30,13 +29,8 @@ export const initialRoutes: Routes = [
   },
 ];
 
-
 export function createCompiler(compilerFactory: CompilerFactory) {
   return compilerFactory.createCompiler();
-}
-
-export function routesPath(config) {
-  return config.uiSettings.routesPath;
 }
 
 @NgModule({
